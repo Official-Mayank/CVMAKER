@@ -7,10 +7,19 @@ package InputInfo;
 
 /**
  *
- * @author Mayank
+ * @author Dhruv
+ * 
  */
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.*;
 import java.awt.FlowLayout;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 public class PersonalInfo extends javax.swing.JFrame {
 
@@ -392,6 +401,28 @@ public class PersonalInfo extends javax.swing.JFrame {
         
     }//GEN-LAST:event_addressAncestorMoved
 
+    private void createPdf(String f_name,String l_name,String addr,String e_mail,String birthday,String obj, long contact) {
+        try {
+            Document doc = new Document();
+            try {
+                PdfWriter.getInstance(doc, new FileOutputStream("My_CV.pdf"));
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(PersonalInfo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            doc.open();
+            doc.add(new Paragraph(f_name + " " + l_name));
+            doc.add(new Paragraph(addr));
+            doc.add(new Paragraph(e_mail));
+            doc.add(new Paragraph(birthday));
+            doc.add(new Paragraph(Long.toString(contact)));
+            doc.add(new Paragraph(obj));
+            doc.close();
+        } catch (DocumentException ex) {
+            Logger.getLogger(PersonalInfo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         // TODO add your handling code here:
         
@@ -401,7 +432,10 @@ public class PersonalInfo extends javax.swing.JFrame {
     e_mail=email.getText();
     birthday=dob.getText();
     contact=Long.parseLong(mobile.getText());
+    obj = objective.getText();
     System.out.println(contact);
+    createPdf(f_name,l_name,addr,e_mail,birthday,obj,contact);
+    
     }//GEN-LAST:event_submitActionPerformed
 
     /**
