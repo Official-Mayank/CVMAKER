@@ -28,6 +28,7 @@ public class PersonalInfo extends javax.swing.JFrame {
      */
     String f_name,l_name,addr,e_mail,birthday,obj;
     long contact;
+    java.io.File picture;
     public PersonalInfo() {
         initComponents();
       getContentPane().setBackground(Color.cyan);
@@ -369,6 +370,9 @@ public class PersonalInfo extends javax.swing.JFrame {
 
     private void insert_picActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insert_picActionPerformed
         // TODO add your handling code here:
+        JFileChooser filechooser = new JFileChooser();
+        if(filechooser.showOpenDialog(null)==JFileChooser.APPROVE_OPTION)
+            picture = filechooser.getSelectedFile();
     }//GEN-LAST:event_insert_picActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
