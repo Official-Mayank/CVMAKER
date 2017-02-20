@@ -7,11 +7,30 @@ package InputInfo;
 
 /**
  *
- * @author Mayank
+ * @author Dhruv
+ * 
  */
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.*;
 import java.awt.FlowLayout;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.*;
+//import org.imgscalr.Scalr;
 public class PersonalInfo extends javax.swing.JFrame {
 
     /**
@@ -19,6 +38,7 @@ public class PersonalInfo extends javax.swing.JFrame {
      */
     String f_name,l_name,addr,e_mail,birthday,obj;
     long contact;
+    java.io.File picture;
     public PersonalInfo() {
         initComponents();
       getContentPane().setBackground(Color.cyan);
@@ -61,13 +81,13 @@ public class PersonalInfo extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator6 = new javax.swing.JSeparator();
         jSeparator8 = new javax.swing.JSeparator();
-        jPanel2 = new javax.swing.JPanel();
         reset = new javax.swing.JButton();
         next = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         dob = new javax.swing.JTextField();
         submit = new javax.swing.JButton();
         insert_pic = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -170,17 +190,6 @@ public class PersonalInfo extends javax.swing.JFrame {
 
         jSeparator8.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 122, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 139, Short.MAX_VALUE)
-        );
-
         reset.setText("Reset");
         reset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,12 +257,12 @@ public class PersonalInfo extends javax.swing.JFrame {
                                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(54, 54, 54)
-                                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addGap(76, 76, 76)
-                                        .addComponent(insert_pic)))
-                                .addGap(0, 62, Short.MAX_VALUE))))
+                                        .addComponent(insert_pic)
+                                        .addGap(0, 17, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jSeparator2)))
@@ -293,9 +302,9 @@ public class PersonalInfo extends javax.swing.JFrame {
                     .addComponent(jSeparator8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(first, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
@@ -320,13 +329,10 @@ public class PersonalInfo extends javax.swing.JFrame {
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(dob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(insert_pic)))
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(insert_pic))
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
@@ -338,7 +344,7 @@ public class PersonalInfo extends javax.swing.JFrame {
                     .addComponent(reset)
                     .addComponent(next)
                     .addComponent(submit))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -360,6 +366,38 @@ public class PersonalInfo extends javax.swing.JFrame {
 
     private void insert_picActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insert_picActionPerformed
         // TODO add your handling code here:
+        JFileChooser filechooser = new JFileChooser();
+        if(filechooser.showOpenDialog(null)==JFileChooser.APPROVE_OPTION) {
+            picture = filechooser.getSelectedFile();
+                //BufferedImage background = null;
+            /*try {
+                background = Scalr.resize(new URL("file://" + picture.getPath()), 200);
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(PersonalInfo.class.getName()).log(Level.SEVERE, null, ex);
+            }*/
+            java.awt.Image background = null;
+            try {
+                background = java.awt.Toolkit.getDefaultToolkit().createImage(new URL("file:///" + picture.getPath()));
+            } catch (IOException ex) {
+                Logger.getLogger(PersonalInfo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                //JLabel label = new JLabel();            
+            BufferedImage image = new BufferedImage(jLabel9.getWidth(), jLabel9.getHeight(), BufferedImage.TYPE_INT_RGB);
+            Graphics2D g2d = image.createGraphics();
+            g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            g2d.drawImage(background, 0, 0, jLabel9.getWidth(), jLabel9.getHeight(), null);
+            g2d.dispose();
+            
+            ImageIcon icon = new ImageIcon(image);
+            //jLabel9.setBounds(0, 0, 10, 10);
+            jLabel9.setIcon(icon);
+
+            //JPanel panel = new JPanel();
+            /*jPanel2.setLayout(null);
+            jPanel2.add(jLabel9);*/
+            System.out.println("File Selected!");
+        }
+        System.out.println(picture);
     }//GEN-LAST:event_insert_picActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
@@ -392,6 +430,38 @@ public class PersonalInfo extends javax.swing.JFrame {
         
     }//GEN-LAST:event_addressAncestorMoved
 
+    private void createPdf() {
+        try {
+            Document doc = new Document();
+            try {
+                PdfWriter.getInstance(doc, new FileOutputStream("My_CV.pdf"));
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(PersonalInfo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            doc.open();
+            Image image = null;
+            try {
+                image = Image.getInstance(new URL("file:///" + picture.getPath()));
+                image.scalePercent(10);
+            } catch (BadElementException ex) {
+                Logger.getLogger(PersonalInfo.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(PersonalInfo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            doc.add(image);
+            doc.add(new Paragraph(f_name + " " + l_name));
+            doc.add(new Paragraph(addr));
+            doc.add(new Paragraph(e_mail));
+            doc.add(new Paragraph(birthday));
+            doc.add(new Paragraph(Long.toString(contact)));
+            doc.add(new Paragraph(obj));
+            doc.close();
+        } catch (DocumentException ex) {
+            Logger.getLogger(PersonalInfo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         // TODO add your handling code here:
         
@@ -401,7 +471,10 @@ public class PersonalInfo extends javax.swing.JFrame {
     e_mail=email.getText();
     birthday=dob.getText();
     contact=Long.parseLong(mobile.getText());
+    obj = objective.getText();
     System.out.println(contact);
+    createPdf();
+    
     }//GEN-LAST:event_submitActionPerformed
 
     /**
@@ -456,7 +529,7 @@ public class PersonalInfo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
