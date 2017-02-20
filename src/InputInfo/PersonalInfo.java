@@ -434,7 +434,7 @@ public class PersonalInfo extends javax.swing.JFrame {
         try {
             Document doc = new Document();
             try {
-                PdfWriter.getInstance(doc, new FileOutputStream("My_CV.pdf"));
+                PdfWriter.getInstance(doc, new FileOutputStream(f_name+".pdf"));
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(PersonalInfo.class.getName()).log(Level.SEVERE, null, ex);
             }
