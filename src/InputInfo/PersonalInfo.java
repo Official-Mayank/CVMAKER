@@ -10,6 +10,7 @@ package InputInfo;
  * @author Mayank
  * 
  */
+import CreatePdf.CreatePdf;
 import java.awt.Color;
 import java.awt.*;
 import javax.swing.*;
@@ -382,14 +383,18 @@ public class PersonalInfo extends javax.swing.JFrame {
     }//GEN-LAST:event_insert_picActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-
-        f_name=first.getText();
-        l_name=last.getText();
-        addr=address.getText();
-        e_mail=email.getText();
-        birthday=dob.getText();
-        contact=Long.parseLong(mobile.getText());
-        obj = objective.getText();
+        
+        CreatePdf myCV = new CreatePdf();
+        myCV.f_name=first.getText();
+        System.out.println(myCV.f_name);
+        myCV.l_name=last.getText();
+        myCV.addr=address.getText();
+        myCV.e_mail=email.getText();
+        myCV.birthday=dob.getText();
+        myCV.contact=Long.parseLong(mobile.getText());
+        myCV.obj = objective.getText();
+        myCV.picture = picture;
+        myCV.makePdf();
         Education open= new Education();
         open.setVisible(true);
         close();
@@ -424,7 +429,6 @@ public class PersonalInfo extends javax.swing.JFrame {
     
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         // TODO add your handling code here:
-    
     
     }//GEN-LAST:event_submitActionPerformed
 

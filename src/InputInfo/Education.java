@@ -43,7 +43,7 @@ public class Education extends javax.swing.JFrame {
         t_year = new javax.swing.JTextField();
         degree = new javax.swing.JTextField();
         cgpa = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        addEducation = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
 
@@ -87,11 +87,11 @@ public class Education extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(28, 77, 227));
-        jButton1.setText("ADD");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addEducation.setBackground(new java.awt.Color(28, 77, 227));
+        addEducation.setText("ADD");
+        addEducation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addEducationActionPerformed(evt);
             }
         });
 
@@ -131,7 +131,7 @@ public class Education extends javax.swing.JFrame {
                                     .addComponent(jTextField1)))))
                     .addGroup(educationLayout.createSequentialGroup()
                         .addGap(154, 154, 154)
-                        .addComponent(jButton1)))
+                        .addComponent(addEducation)))
                 .addGap(0, 124, Short.MAX_VALUE))
         );
         educationLayout.setVerticalGroup(
@@ -161,7 +161,7 @@ public class Education extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(cgpa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45)
-                .addComponent(jButton1)
+                .addComponent(addEducation)
                 .addContainerGap(199, Short.MAX_VALUE))
         );
 
@@ -190,9 +190,10 @@ public class Education extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cgpaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void addEducationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEducationActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        Education education = new Education();
+    }//GEN-LAST:event_addEducationActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
@@ -234,11 +235,11 @@ public class Education extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addEducation;
     private javax.swing.JTextField cgpa;
     private javax.swing.JTextField degree;
     private javax.swing.JPanel education;
     private javax.swing.JTextField f_year;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

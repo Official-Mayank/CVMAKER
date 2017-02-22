@@ -18,10 +18,9 @@ import InputInfo.PersonalInfo;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.Image;
 import java.io.IOException;
-import java.net.MalformedURLException;
 /**
  *
- * @author Smart
+ * @author Dhruv
  */
 public class CreatePdf extends PersonalInfo {
     
@@ -41,12 +40,13 @@ public class CreatePdf extends PersonalInfo {
             Image image = null;
             try {
                 image = Image.getInstance(new URL("file:///" + picture.getPath()));
+                System.out.println(picture);
             } catch (BadElementException ex) {
                 Logger.getLogger(CreatePdf.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(CreatePdf.class.getName()).log(Level.SEVERE, null, ex);
             }
-            image.scalePercent(10);
+            image.scalePercent(25);
             image.setAlignment(Image.ALIGN_RIGHT);
             doc.add(image);
             doc.add(new Paragraph(f_name + " " + l_name));
