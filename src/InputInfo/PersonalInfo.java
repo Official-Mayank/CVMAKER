@@ -10,27 +10,8 @@ package InputInfo;
  * @author Mayank
  * 
  */
-import java.awt.Graphics;
 import java.awt.Color;
-import com.itextpdf.text.BadElementException;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
-//import com.itextpdf.text.Image;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.*;
-import java.awt.FlowLayout;
-import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.WindowEvent;
 import java.awt.Toolkit;
@@ -40,11 +21,11 @@ public class PersonalInfo extends javax.swing.JFrame {
     /**
      * Creates new form PersonalInfo
      */
-    String path;
-    String f_name,l_name,addr,e_mail,birthday,obj;
-    long contact;
-    Image img;
-    java.io.File picture;
+    public String path;
+    public String f_name,l_name,addr,e_mail,birthday,obj;
+    public long contact;
+    public Image img;
+    public java.io.File picture;
     public PersonalInfo() {
         initComponents();
      getContentPane().setBackground(new Color(0,91,124));
@@ -396,38 +377,12 @@ public class PersonalInfo extends javax.swing.JFrame {
             ImageIcon ic=new ImageIcon(newimg);
             picpanel.setIcon(ic);
             
-            
-            /*try {
-                background = Scalr.resize(new URL("file://" + picture.getPath()), 200);
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(PersonalInfo.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
-           /* java.awt.Image background = null;
-            try {
-                background = java.awt.Toolkit.getDefaultToolkit().createImage(new URL("file:///" + picture.getPath()));
-            } catch (IOException ex) {
-                Logger.getLogger(PersonalInfo.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                //JLabel label = new JLabel();            
-            BufferedImage image = new BufferedImage(picpanel.getWidth(), picpanel.getHeight(), BufferedImage.TYPE_INT_ARGB);
-            Graphics  g2d = image.getGraphics();
-            picpanel.paint(g2d);
-            
-            ImageIcon icon = new ImageIcon(image);
-            //jLabel9.setBounds(0, 0, 10, 10);
-           // picpanel.setIcon(icon);
-          
-
-            //JPanel panel = new JPanel();
-            /*jPanel2.setLayout(null);
-            jPanel2.add(jLabel9);*/
-            //System.out.println("File Selected!");
         }
-        System.out.println(picture);
+        //System.out.println(picture);
     }//GEN-LAST:event_insert_picActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        // TODO add your handling code here:
+
         f_name=first.getText();
         l_name=last.getText();
         addr=address.getText();
@@ -435,8 +390,6 @@ public class PersonalInfo extends javax.swing.JFrame {
         birthday=dob.getText();
         contact=Long.parseLong(mobile.getText());
         obj = objective.getText();
-        System.out.println(contact);
-        createPdf();
         Education open= new Education();
         open.setVisible(true);
         close();
@@ -468,37 +421,6 @@ public class PersonalInfo extends javax.swing.JFrame {
         
     }//GEN-LAST:event_addressAncestorMoved
 
-    private void createPdf() {
-        try {
-            Document doc = new Document();
-            try {
-                PdfWriter.getInstance(doc, new FileOutputStream(f_name+".pdf"));
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(PersonalInfo.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            doc.open();
-            Image image = null;
-            try {
-                image = Image.getInstance(new URL("file:///" + picture.getPath()));
-                image.scalePercent(10);
-            } catch (BadElementException ex) {
-                Logger.getLogger(PersonalInfo.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(PersonalInfo.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            doc.add(image);
-            doc.add(new Paragraph(f_name + " " + l_name));
-            doc.add(new Paragraph(addr));
-            doc.add(new Paragraph(e_mail));
-            doc.add(new Paragraph(birthday));
-            doc.add(new Paragraph(Long.toString(contact)));
-            doc.add(new Paragraph(obj));
-            doc.close();
-        } catch (DocumentException ex) {
-            Logger.getLogger(PersonalInfo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
     
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         // TODO add your handling code here:
